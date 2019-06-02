@@ -1,0 +1,28 @@
+
+.text-area .scroll-pane {
+-fx-hbar-policy: never;
+-fx-vbar-policy: never;
+
+}
+.text-area {
+-fx-font-size: 12px;
+-fx-font-family: 'Courier New';
+-fx-padding: 1 1 1 1;
+-fx-text-box-border: transparent;
+-fx-focus-color: #FFFfff;
+-fx-highlight-text-fill: #FFFFFF;
+-fx-highlight-fill:#DA3030;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #EB1A24;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 1;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: null;
+
+}
