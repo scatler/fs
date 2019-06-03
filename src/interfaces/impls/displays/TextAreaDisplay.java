@@ -14,14 +14,13 @@ import java.util.stream.Collectors;
 public class TextAreaDisplay implements Display {
     private TextArea disp;
     private MainController mainController;
-    private int nlines;
     private int mode;
 
     /**
-     * Reverse output -1, forward 1
-     * @param mode
+     * Configure a display to show lines of text in reverse mode or normal mode
+     * @param mode reverse  output: mode =-1;
+     *             normal   output: mode = 1.
      */
-
     public void setMode(int mode) {
         this.mode = mode;
     }
@@ -78,21 +77,6 @@ public class TextAreaDisplay implements Display {
             disp.setText(temp.replace(s,""));
         }
 
-    }
-
-    public int getLinesCount() {
-        int n = 0;
-        double ht = 0;
-        String text = disp.getText();
-        disp.setText("");
-        Text t = (Text) disp.lookup(".text");
-        while (ht < disp.getHeight()) {
-            disp.appendText("\n");
-            ht = t.getBoundsInLocal().getHeight();
-            n++;
-        }
-        disp.setText(text);
-        return nlines = n;
     }
 
     public void insertText(int index, String text) {

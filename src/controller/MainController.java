@@ -6,8 +6,6 @@ import interfaces.impls.displays.TextAreaDisplay;
 import interfaces.impls.readers.RandomAccessReadFile;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,12 +36,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MainController implements Initializable {
-    //TODO delete test data
-    private static final String FILE_PATH = "D:\\From int\\pwned-passwords-ntlm-ordered-by-hash-v4\\3-Кириллица\\Последняя новость из Lenta.txt";
-    private static final long READ_BUFF = 2000;
     public static final int NUMLINES = 200;
     public static final int CR = 10;
     public static final String ENCODING = "UTF-8";
+    //TODO delete test data
+
     public static volatile AtomicInteger foundFiles = new AtomicInteger(0);
     private final Node rootIcon =
             new ImageView(new Image(("pics/folder_16x16.png")));
@@ -56,31 +53,16 @@ public class MainController implements Initializable {
     public TabPane tabPaneCntrl;
     public Button browseBtn;
     public Button btnStop;
-
-
-    private FileObject searchPath = new FileObject("C:\\");
-    private ListIterator<Long> it;
-
-    public String getTextToFind() {
-        return textToFind;
-    }
-
     private String textToFind = "";
-    private FileObject f;
 
     private BlockingQueue<FileObject>
             nodesToReview = new LinkedBlockingQueue<>(),
             filesToReview = new LinkedBlockingQueue<>(),
             filesToSet = new LinkedBlockingQueue<>();
     @FXML
-    private Button openTestFile;
-    @FXML
     private ScrollBar scrollBar;
     @FXML
-    private TextArea firstTextDisplay;
-    @FXML
     private TreeView<FileObject> treeViewer;
-
     private FileObject cfile; //current file
     private Display cdisp; // current display
     private String fileExtension;
@@ -88,9 +70,11 @@ public class MainController implements Initializable {
     private ExecutorService nodeReview;
     private ExecutorService fileReview;
     private IFileRead fileReader;
-    private boolean firstTime = true;
     private Map<FileObject, Tab> mapTabFile = new HashMap<>();
-    public final Map<FileObject, List<Integer>> curIndex = new HashMap<>(); //unvisited number/total/current
+
+    public String getTextToFind() {
+        return textToFind;
+    }
 
     public Node getRootIcon() {
         return rootIcon;
@@ -98,10 +82,6 @@ public class MainController implements Initializable {
 
     private Display getTextDisplay() {
         return cdisp;
-    }
-
-    private void setTextDisplay(TextArea ta) {
-        cdisp = new TextAreaDisplay(ta, this);
     }
 
     public IFileRead makeReader(FileObject cfile) {
@@ -129,9 +109,6 @@ public class MainController implements Initializable {
                 String s = "Some test text";
                 insertText(s);
                 break;
-            case "btnOpenTestFile":
-                fileOpened();
-                break;
 
 
         }
@@ -146,15 +123,7 @@ public class MainController implements Initializable {
     }
 
 
-    //for debug purpose
-    public void fileOpened() {
 
-        cfile = new FileObject(FILE_PATH);
-        fileReader = makeReader(cfile);
-
-        show(0, NUMLINES, cdisp, fileReader, cfile);
-
-    }
 
 
     private void fileOpened(FileObject value) {
@@ -199,7 +168,7 @@ public class MainController implements Initializable {
 
         fileExtension = inputFileExtension.getText();
         textToFind = inputTextToFind.getText();
-        searchPath = new FileObject(inputSearchPath.getText());
+        FileObject searchPath = new FileObject(inputSearchPath.getText());
 
         //TODO replace with methods
         if (treeViewer.getRoot() != null) {
@@ -282,9 +251,6 @@ public class MainController implements Initializable {
         Label currTotalLab = new Label("0/0");
 
         fo.getFi().setCurrTotalLab(currTotalLab);
-
-        //Back-end
-        ObservableList<Long> visited = FXCollections.observableArrayList();
 
         //Control buttons
         HBox ctrlBtnHBox = new HBox();
@@ -406,7 +372,6 @@ public class MainController implements Initializable {
     }
 
 
-    ;
 }
 
 

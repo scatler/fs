@@ -2,8 +2,6 @@ package objects;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TreeItem;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -13,8 +11,7 @@ public class FileInfo {
     Label currTotalLab = new Label("0/0");
     int cpos = -1;
     private FileObject f;
-    private TreeItem<FileObject> tItem;
-    private Tab tab;
+
     public FileInfo(FileObject f) {
         this.f = f;
     }
@@ -23,32 +20,12 @@ public class FileInfo {
         return pos;
     }
 
-    public Label getCurrTotalLab() {
-        return currTotalLab;
-    }
-
     public void setCurrTotalLab(Label currTotalLab) {
         this.currTotalLab = currTotalLab;
     }
 
     public boolean isEmpty() {
         return pos.isEmpty();
-    }
-
-    public Tab getTab() {
-        return tab;
-    }
-
-    public void setTab(Tab tab) {
-        this.tab = tab;
-    }
-
-    public TreeItem<FileObject> gettItem() {
-        return tItem;
-    }
-
-    public void settItem(TreeItem<FileObject> tItem) {
-        this.tItem = tItem;
     }
 
     public void addPos(Long val) {
@@ -88,11 +65,6 @@ public class FileInfo {
     public Long nextPos() {
 
         return movePos(1);
-    }
-
-    public Long prevPos() {
-
-        return movePos(-1);
     }
 
 }
