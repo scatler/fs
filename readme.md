@@ -1,6 +1,6 @@
 FileSearcher JAVAFX
 
-A simple file searhcer based on JavaFX technology
+A simple file searcher based on JavaFX technology
 
 Features:
 
